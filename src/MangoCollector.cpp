@@ -66,19 +66,16 @@ struct node{
 	int data;
 	struct node *left;
 	struct node *right;
-};/*
-int shortestpath(struct node *startcity, int *shortestpath, int *shortestpathlen)
-{
+};
 
 
-}
-int mangocity_count_ways_and_paths(struct node *startcity, int k, int *shortestpath, int *shortestpathlen, int currentk,int * ways)
+int mangocity_count_ways_and_paths(struct node *startcity, int k, int *shortestpath, int *shortestpathlen, int currentk)
 {
 	if (startcity == NULL)
 	{  
 		if (k == currentk)
 		{
-			return ways++;
+			return 1;
 		}
 		else {
 			return 0;
@@ -86,16 +83,17 @@ int mangocity_count_ways_and_paths(struct node *startcity, int k, int *shortestp
 	}
 	if (k == currentk)
 	{
-		return ways++;
+		return 1;
 	}
 	else
 	{
-		 ways=mangocity_count_ways_and_paths(startcity->left, k, shortestpath, shortestpathlen, currentk + startcity->data,ways);
-		 ways=mangocity_count_ways_and_paths(startcity->right, k, shortestpath, shortestpathlen, currentk + startcity->data,ways);
+		int ways=mangocity_count_ways_and_paths(startcity->left, k, shortestpath, shortestpathlen, currentk + startcity->data);
+		ways++;
+		 ways=mangocity_count_ways_and_paths(startcity->right, k, shortestpath, shortestpathlen, currentk + startcity->data);
 		 return ways;
 	}
 
-}*/
+}
 
 int mangocity_count_ways(struct node *startcity,int k, int *shortestpath,int *shortestpathlen){
 	//Just Copy values in shortestpath and shortestpathlen .Dont allocate memory for it .
@@ -103,6 +101,10 @@ int mangocity_count_ways(struct node *startcity,int k, int *shortestpath,int *sh
 	if (startcity == NULL)
 	{
 		return -1;
+	}
+	else
+	{
+		return mangocity_count_ways_and_paths(startcity, k, shortestpath, shortestpathlen, 0);
 	}
 	
 }
